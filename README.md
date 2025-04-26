@@ -1,67 +1,67 @@
-🦊 BotFanFuria
-BotFanFuria é um bot interativo do Telegram criado para os fãs da equipe de CS:GO FURIA. Ele fornece informações sobre jogadores, estatísticas, curiosidades e muito mais, diretamente no Telegram.
+# 🦊 BotFanFuria
 
+**BotFanFuria** é um bot interativo do Telegram criado para os fãs da equipe de CS:GO **FURIA**. Ele fornece informações sobre jogadores, estatísticas, curiosidades e muito mais, diretamente no Telegram.
 
-📌 Índice
+---
 
-🎯 Objetivo
+## 📌 Índice
 
-🧠 Funcionalidades
+- [🎯 Objetivo](#-objetivo)
+- [🧠 Funcionalidades](#-funcionalidades)
+- [🚀 Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [⚙️ Como Usar](#-como-usar)
+- [💡 Comandos Disponíveis](#-comandos-disponíveis)
+- [📄 Licença](#-licença)
 
-🚀 Tecnologias Utilizadas
+---
 
-⚙️ Como Usar
+## 🎯 Objetivo
 
-💡 Comandos Disponíveis
-
-📄 Licença
-
-
-🎯 Objetivo
 Proporcionar uma experiência interativa para os fãs da FURIA, permitindo acesso rápido a informações sobre a equipe e seus jogadores através do Telegram.
 
+---
 
-🧠 Funcionalidades
-Informações detalhadas sobre jogadores da FURIA
+## 🧠 Funcionalidades
 
-Estatísticas atualizadas de partidas
+- Informações detalhadas sobre jogadores da FURIA  
+- Estatísticas atualizadas de partidas  
+- Curiosidades e fatos interessantes sobre a equipe  
+- Notificações de próximos jogos e resultados recentes  
+- Interface amigável e interativa no Telegram  
 
-Curiosidades e fatos interessantes sobre a equipe
+---
 
-Notificações de próximos jogos e resultados recentes
+## 🚀 Tecnologias Utilizadas
 
-Interface amigável e interativa no Telegram
+- **Python 3.9+**  
+- **[python-telegram-bot](https://docs.python-telegram-bot.org/)** – biblioteca de integração com a API do Telegram  
+- **HTML** – para criar a landing page funcional  
+- **CSS** – para estilizar a página e garantir uma interface visual atraente  
 
+---
 
-🚀 Tecnologias Utilizadas
-Python 3.9+
+## ⚙️ Como Usar
 
-python-telegram-bot – biblioteca de integração com a API do Telegram
-
-HTML – para criar a landing page funcional
-
-CSS – para estilizar a página e garantir uma interface visual atraente
-
-
-⚙️ Como Usar
 Acesse a experiência interativa do bot pela página abaixo:
 
-👉 https://tiagosaannttos.github.io/BotFanFuria
+👉 [https://tiagosaannttos.github.io/BotFanFuria](https://tiagosaannttos.github.io/BotFanFuria)
 
+---
 
-💡 Comandos Disponíveis
-/start – Inicia a conversa com o bot
+## 💡 Comandos Disponíveis
 
-/jogadores – Lista os jogadores atuais da FURIA
+- `/start` – Inicia a conversa com o bot  
+- `/jogadores` – Lista os jogadores atuais da FURIA  
+- `/estatisticas` – Mostra estatísticas recentes da equipe  
+- `/curiosidades` – Exibe curiosidades sobre a FURIA  
+- `/proximos_jogos` – Informa os próximos jogos agendados  
 
-/estatisticas – Mostra estatísticas recentes da equipe
+---
 
-/curiosidades – Exibe curiosidades sobre a FURIA
+## 📄 Licença
 
-/proximos_jogos – Informa os próximos jogos agendados
-
-
-
-📄 Licença
-© 2025 Tiago dos Santos Silva. Todos os direitos reservados.
+© 2025 **Tiago dos Santos Silva**. Todos os direitos reservados.  
 Este projeto não está autorizado para uso, distribuição ou modificação sem permissão expressa.
+
+---
+
