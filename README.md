@@ -1,7 +1,9 @@
 🦊 BotFanFuria
 BotFanFuria é um bot interativo do Telegram criado para os fãs da equipe de CS:GO FURIA. Ele fornece informações sobre jogadores, estatísticas, curiosidades e muito mais, diretamente no Telegram.
 
+
 📌 Índice
+
 🎯 Objetivo
 
 🧠 Funcionalidades
@@ -14,8 +16,10 @@ BotFanFuria é um bot interativo do Telegram criado para os fãs da equipe de CS
 
 📄 Licença
 
+
 🎯 Objetivo
 Proporcionar uma experiência interativa para os fãs da FURIA, permitindo acesso rápido a informações sobre a equipe e seus jogadores através do Telegram.
+
 
 🧠 Funcionalidades
 Informações detalhadas sobre jogadores da FURIA
@@ -28,6 +32,7 @@ Notificações de próximos jogos e resultados recentes
 
 Interface amigável e interativa no Telegram
 
+
 🚀 Tecnologias Utilizadas
 Python 3.9+
 
@@ -37,10 +42,12 @@ HTML – para criar a landing page funcional
 
 CSS – para estilizar a página e garantir uma interface visual atraente
 
+
 ⚙️ Como Usar
 Acesse a experiência interativa do bot pela página abaixo:
 
 👉 https://tiagosaannttos.github.io/BotFanFuria
+
 
 💡 Comandos Disponíveis
 /start – Inicia a conversa com o bot
