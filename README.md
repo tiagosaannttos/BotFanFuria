@@ -44,7 +44,7 @@ Proporcionar uma experiência interativa para os fãs da FURIA, permitindo acess
 
 Acesse a experiência interativa do bot pela página abaixo:
 
-👉 [Clique aqui para acessar]()
+👉 [Clique aqui para acessar]( https://tiagosaannttos.github.io/BotFanFuria/)
 
 ---
 
