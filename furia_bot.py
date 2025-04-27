@@ -3,15 +3,15 @@ from telebot import types
 import random
 import time
 
+# API Key do Bot
 Chave_API = "CHAVE_API_TELEGRAM"
-
 bot = telebot.TeleBot(Chave_API)
 
 # URLs das fotos
-FURIA_LOGO_URL = "https://i.ibb.co/cK2BSVhH/logo-furia.png"  # Foto para o início (/start)
-FURIA_QUIZ_LOGO_URL = "https://i.ibb.co/5xFjrQyW/lgoo-furia-quiz.png"  # Substitua por um link válido para a foto do quiz
+FURIA_LOGO_URL = "https://i.ibb.co/cK2BSVhH/logo-furia.png"
+FURIA_QUIZ_LOGO_URL = "https://i.ibb.co/5xFjrQyW/lgoo-furia-quiz.png"
 
-# Lista de curiosidades
+# Curiosidades
 curiosidades = [
     "👕 A FURIA já mandou um uniforme `rosa choque` de respeito!",
     "🌍 Já representou o Brasil nos maiores torneios de `CS` do mundo!",
@@ -20,7 +20,7 @@ curiosidades = [
     "🔥 O estilo `agressivo` é a alma da FURIA!",
 ]
 
-# Informações sobre o futebol da FURIA
+# Futebol e Kings League Info
 futebol_info = (
     "⚽ **FURIA no Futebol** ⚽\n"
     "Tá voando no `Campeonato Brasileiro`! 🏆\n"
@@ -28,7 +28,6 @@ futebol_info = (
     "🔥 `Promessa braba` do futebol nacional!"
 )
 
-# Informações atualizadas da Kings League
 kings_league_info = (
     "👑 **Kings League Brasil 2025** 👑\n"
     "Rolando desde `29/03` na `Arena Kings League`, Guarulhos! 🏟️\n"
@@ -42,7 +41,7 @@ kings_league_info = (
     "Final no `Allianz Stadium`! 🏆"
 )
 
-# Perguntas do quiz
+# Quiz
 quiz_perguntas = [
     {
         "pergunta": "Em que ano a FURIA foi fundada? 🐆",
@@ -61,42 +60,9 @@ quiz_perguntas = [
     }
 ]
 
-# Dicionário para rastrear o estado do quiz por usuário
 quiz_estado = {}
 
-# Comando /start - Mostra o logo inicial e o menu
-@bot.message_handler(commands=['start'])
-def menu(message):
-    # Enviar o logo inicial da FURIA
-    try:
-        bot.send_photo(
-            message.chat.id,
-            FURIA_LOGO_URL,  # Foto do início
-            caption="🔥 **FURIA Esports na veia!** 🐆",
-            parse_mode="Markdown"
-        )
-    except Exception as e:
-        bot.send_message(
-            message.chat.id,
-            f"❗ Ops, erro ao carregar o logo: {str(e).replace('_', '\\_')}. Mas bora pro rolê!",
-            parse_mode="Markdown"
-        )
-
-    # Mostrar o menu
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-    markup.add("📊 Últimos jogos", "📅 Próximos jogos")
-    markup.add("🐆 Sobre o time", "🌐 Redes sociais")
-    markup.add("📚 Curiosidade", "⚽ Futebol da FURIA")
-    markup.add("👑 Kings League", "❓ Quiz")
-
-    texto = (
-        "🔥 **FuriaArenaBot tá ON!** 🔥\n"
-        "Teu parceiro da *FURIA Esports*! 🐆\n"
-        "Escolhe uma opção e bora detonar! 👇"
-    )
-    bot.send_message(message.chat.id, texto, reply_markup=markup, parse_mode="Markdown")
-
-# Função para criar botões inline das redes sociais
+# Funções Auxiliares
 def redes_sociais_buttons():
     markup = types.InlineKeyboardMarkup()
     markup.row(
@@ -106,14 +72,12 @@ def redes_sociais_buttons():
     markup.add(types.InlineKeyboardButton("🎥 YouTube", url="https://youtube.com/furia"))
     return markup
 
-# Função para criar botões inline do quiz
 def quiz_buttons(opcoes):
     markup = types.InlineKeyboardMarkup(row_width=3)
     buttons = [types.InlineKeyboardButton(text=opcao, callback_data=opcao) for opcao in opcoes]
     markup.add(*buttons)
     return markup
 
-# Função para iniciar ou continuar o quiz
 def enviar_pergunta(chat_id, user_id):
     if user_id not in quiz_estado:
         quiz_estado[user_id] = {"pergunta_atual": 0, "pontuacao": 0}
@@ -122,7 +86,6 @@ def enviar_pergunta(chat_id, user_id):
     pergunta_atual = estado["pergunta_atual"]
 
     if pergunta_atual >= len(quiz_perguntas):
-        # Fim do quiz
         pontuacao = estado["pontuacao"]
         msg_final = (
             f"🏆 **Fim do Quiz!** 🏆\n"
@@ -136,39 +99,68 @@ def enviar_pergunta(chat_id, user_id):
             msg_final += "😅 `Tá começando!` Bora aprender mais sobre a FURIA? 🖤\n"
         msg_final += "Bora tentar de novo? Digite **Sim** ou **Não**."
 
-        # Enviar o logo do quiz
         try:
-            bot.send_photo(
-                chat_id,
-                FURIA_QUIZ_LOGO_URL,  # Foto do quiz
-                caption=msg_final,
-                parse_mode="Markdown"
-            )
+            bot.send_photo(chat_id, FURIA_QUIZ_LOGO_URL, caption=msg_final, parse_mode="Markdown")
         except Exception as e:
-            bot.send_message(
-                chat_id,
-                f"{msg_final}\n❗ Ops, erro ao carregar o logo: {str(e).replace('_', '\\_')}.",
-                parse_mode="Markdown"
-            )
+            bot.send_message(chat_id, f"{msg_final}\n❗ Ops, erro ao carregar o logo: {str(e).replace('_', '\\_')}.", parse_mode="Markdown")
 
-        estado["aguardando_reinicio"] = True  # Marcar que está esperando Sim/Não
+        estado["aguardando_reinicio"] = True
         return
 
-    # Enviar pergunta
     pergunta = quiz_perguntas[pergunta_atual]
     texto = (
         f"❓ **Quiz FURIA - {pergunta_atual + 1}/{len(quiz_perguntas)}** ❓\n"
         f"`{pergunta['pergunta']}`\n\n"
         f"Escolha uma opção:"
     )
-    bot.send_message(
-        chat_id,
-        texto,
-        reply_markup=quiz_buttons(pergunta["opcoes"]),
-        parse_mode="Markdown"
+    bot.send_message(chat_id, texto, reply_markup=quiz_buttons(pergunta["opcoes"]), parse_mode="Markdown")
+
+# Comando /start
+@bot.message_handler(commands=['start'])
+def menu(message):
+    try:
+        bot.send_photo(message.chat.id, FURIA_LOGO_URL, caption="🔥 **FURIA Esports na veia!** 🐆", parse_mode="Markdown")
+    except Exception as e:
+        bot.send_message(message.chat.id, f"❗ Ops, erro ao carregar o logo: {str(e).replace('_', '\\_')}. Bora pro rolê!", parse_mode="Markdown")
+
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    markup.add(
+        "📊 Últimos jogos", "📅 Próximos jogos",
+        "🐆 Sobre o time", "🌐 Redes sociais",
+        "📚 Curiosidade", "⚽ Futebol da FURIA",
+        "👑 Kings League", "❓ Quiz",
+        "🔥 Torcer pela FURIA", "🎯 Status da Partida"
     )
 
-# Lidar com respostas do quiz
+    texto = (
+        "🔥 **FuriaArenaBot tá ON!** 🔥\n"
+        "Teu parceiro da *FURIA Esports*! 🐆\n"
+        "Escolhe uma opção e bora detonar! 👇"
+    )
+    bot.send_message(message.chat.id, texto, reply_markup=markup, parse_mode="Markdown")
+
+# Comando /torcer
+@bot.message_handler(commands=['torcer'])
+def torcer(message):
+    torcida_msg = (
+        "🚨 *A torcida da FURIA tá ON!* 🚨\n"
+        "🎯 *Faz barulho!* Quem vai ganhar? *FURIAAAAA!* 🔥\n"
+        "💥 Vamos juntos, galera! O time precisa de vocês! 🐆"
+    )
+    bot.send_message(message.chat.id, torcida_msg, parse_mode="Markdown")
+
+# Comando /status
+@bot.message_handler(commands=['status'])
+def status_de_jogo(message):
+    status = [
+        "🎮 Partida em andamento: `FURIA 10 x 7 G2` - Round 18",
+        "🎯 KSCERATO fez um `clutch 1v3`! 🔥",
+        "💥 FURIA dominando o mapa `Inferno`!",
+        "🚀 Vamos rumo à vitória, parça! 🐆"
+    ]
+    bot.send_message(message.chat.id, random.choice(status), parse_mode="Markdown")
+
+# Callback do Quiz
 @bot.callback_query_handler(func=lambda call: True)
 def callback_quiz(call):
     user_id = call.from_user.id
@@ -183,56 +175,36 @@ def callback_quiz(call):
     pergunta_atual = estado["pergunta_atual"]
     pergunta = quiz_perguntas[pergunta_atual]
 
-    # Verificar resposta
     if resposta == pergunta["correta"]:
         estado["pontuacao"] += 1
         bot.answer_callback_query(call.id, "✅ `Acertou!` Bora pra próxima! 🔥")
     else:
         bot.answer_callback_query(call.id, f"❌ `Errou!` Era `{pergunta['correta']}`. Vamos lá! 😎")
 
-    # Avançar para próxima pergunta
     estado["pergunta_atual"] += 1
     enviar_pergunta(chat_id, user_id)
 
-# Função principal para responder às opções do menu
+# Responder ao Menu
 @bot.message_handler(func=lambda msg: True)
 def responder(msg):
-    texto = msg.text.strip().lower()  # Normalizar texto pra minúsculas
+    texto = msg.text.strip().lower()
     chat_id = msg.chat.id
     user_id = msg.from_user.id
 
-    # Verificar se está esperando Sim/Não do quiz
     if user_id in quiz_estado and quiz_estado[user_id].get("aguardando_reinicio"):
         if texto in ["sim", "s"]:
-            del quiz_estado[user_id]  # Resetar estado
+            del quiz_estado[user_id]
             bot.send_message(chat_id, "🔥 **Bora de novo!** Quiz reiniciado! 🐆", parse_mode="Markdown")
             enviar_pergunta(chat_id, user_id)
         elif texto in ["não", "nao", "n"]:
-            del quiz_estado[user_id]  # Resetar estado
-            bot.send_message(
-                chat_id,
-                "😎 **Beleza, parça!** Usa o menu pra continuar curtindo a FURIA! 👇",
-                parse_mode="Markdown",
-                reply_markup=types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2).add(
-                    "📊 Últimos jogos", "📅 Próximos jogos",
-                    "🐆 Sobre o time", "🌐 Redes sociais",
-                    "📚 Curiosidade", "⚽ Futebol da FURIA",
-                    "👑 Kings League", "❓ Quiz"
-                )
-            )
+            del quiz_estado[user_id]
+            menu(msg)
         else:
             bot.send_message(chat_id, "❗ Digite **Sim** ou **Não**, parça! 😎", parse_mode="Markdown")
         return
 
-    # Respostas normais do menu
     if texto == "📊 últimos jogos":
-        bot.send_message(
-            chat_id,
-            "📊 **Últimos Resultados** 📊\n"
-            "🆚 `FURIA 2 x 1 NAVI`\n"
-            "📅 *22/04/2025* - `IEM Katowice 2025`",
-            parse_mode="Markdown"
-        )
+        bot.send_message(chat_id, "📊 **Últimos Resultados** 📊\n🆚 `FURIA 2 x 1 NAVI`\n📅 *22/04/2025* - `IEM Katowice 2025`", parse_mode="Markdown")
 
     elif texto == "📅 próximos jogos":
         proxima_msg = (
@@ -246,29 +218,13 @@ def responder(msg):
         bot.send_message(chat_id, proxima_msg, parse_mode="Markdown")
 
     elif texto == "🐆 sobre o time":
-        bot.send_message(
-            chat_id,
-            "🐆 **FURIA Esports** 🐆\n"
-            "Desde `2017`, a FURIA é a fera do CS brasileiro!\n"
-            "💥 Dominando palcos mundiais com `jogadas insanas`! 🖤",
-            parse_mode="Markdown"
-        )
+        bot.send_message(chat_id, "🐆 **FURIA Esports** 🐆\nDesde `2017`, a FURIA é a fera do CS brasileiro!\n💥 Dominando palcos mundiais com `jogadas insanas`! 🖤", parse_mode="Markdown")
 
     elif texto == "🌐 redes sociais":
-        bot.send_message(
-            chat_id,
-            "📲 **Conecta com a FURIA!** 📲\n"
-            "Fica por dentro de tudo nas redes! 👇",
-            parse_mode="Markdown",
-            reply_markup=redes_sociais_buttons()
-        )
+        bot.send_message(chat_id, "📲 **Conecta com a FURIA!** 📲\nFica por dentro de tudo nas redes! 👇", parse_mode="Markdown", reply_markup=redes_sociais_buttons())
 
     elif texto == "📚 curiosidade":
-        bot.send_message(
-            chat_id,
-            f"📚 **Sabia disso?** 📚\n`{random.choice(curiosidades)}`",
-            parse_mode="Markdown"
-        )
+        bot.send_message(chat_id, f"📚 **Sabia disso?** 📚\n`{random.choice(curiosidades)}`", parse_mode="Markdown")
 
     elif texto == "⚽ futebol da furia":
         bot.send_message(chat_id, futebol_info, parse_mode="Markdown")
@@ -279,12 +235,14 @@ def responder(msg):
     elif texto == "❓ quiz":
         enviar_pergunta(chat_id, user_id)
 
+    elif texto == "🔥 torcer pela furia":
+        torcer(msg)
+
+    elif texto == "🎯 status da partida":
+        status_de_jogo(msg)
+
     else:
-        bot.send_message(
-            chat_id,
-            "❗ **Zoeira detectada!** Usa os botões do menu, parça! 😎",
-            parse_mode="Markdown"
-        )
+        bot.send_message(chat_id, "❗ **Zoeira detectada!** Usa os botões do menu, parça! 😎", parse_mode="Markdown")
 
 # Inicia o bot
 bot.polling()
