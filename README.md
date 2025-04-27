@@ -9,7 +9,7 @@ BotFanFuria é um bot interativo do Telegram criado para os fãs da equipe de CS
 - 🎯 Objetivo
 - 🧠 Funcionalidades
 - 🚀 Tecnologias Utilizadas
-- [⚙️ Como Usar](#️-como-usar)
+- ⚙️ Como Usar
 - 💡 Comandos Disponíveis
 - 📄 Licença
 
