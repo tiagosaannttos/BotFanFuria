@@ -50,11 +50,17 @@ Acesse a experiência interativa do bot pela página abaixo:
 
 ## 💡 Comandos Disponíveis
 
-- `/start` – Inicia a conversa com o bot  
-- `/jogadores` – Lista os jogadores atuais da FURIA  
-- `/estatisticas` – Mostra estatísticas recentes da equipe  
-- `/curiosidades` – Exibe curiosidades sobre a FURIA  
-- `/proximos_jogos` – Informa os próximos jogos agendados  
+-/start – Inicia a conversa com o bot
+-/curiosidades – Exibe curiosidades sobre a FURIA
+-/proximos_jogos – Informa os próximos jogos agendados
+-/ultimos_jogos – Mostra os últimos jogos realizados
+-/sobre_time – Informações sobre o time FURIA
+-/redes_sociais – Links das redes sociais oficiais
+-/futebol_furia – Informações sobre o time de futebol da FURIA
+-/kings_league – Informações sobre a participação na Kings League
+-/quiz – Três perguntas sobre a FURIA
+-/torcer_pela_furia – Mensagem para apoiar o time
+-/status_partida – Status atual da partida  
 
 ---
 
