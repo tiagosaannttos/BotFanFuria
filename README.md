@@ -45,7 +45,24 @@ Proporcionar uma experiência interativa para os fãs da FURIA, permitindo acess
 Acesse a experiência interativa do bot pela página abaixo:
 
 👉 [Clique aqui para acessar]( https://tiagosaannttos.github.io/BotFanFuria/)
+**Ou, para rodar localmente:**
 
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/tiagosaannttos/BotFanFuria.git
+
+2. Acesse a pasta do projeto:
+   ```bash
+  cd BotFanFuria 
+
+3.Instale as dependências:
+   ```bash
+  pip install -r requirements.txt
+
+4.Configure o seu Token do Bot do Telegram no código.
+5.Execute o bot:
+   ```bash
+  python nome_do_arquivo_principal.py  
 ---
 
 ## 💡 Comandos Disponíveis
